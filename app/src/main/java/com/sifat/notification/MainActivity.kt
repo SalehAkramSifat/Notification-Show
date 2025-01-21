@@ -1,5 +1,6 @@
 package com.sifat.notification
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -11,6 +12,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import com.sifat.notification.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,12 +22,12 @@ class MainActivity : AppCompatActivity() {
     private val CHANNEL_NAME = "channelName"
     private val NOTIFICATION_ID = 0
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // নোটিফিকেশন চ্যানেল তৈরি করা হচ্ছে
         createNotificationChannel()
 
         val intent = Intent(this, MainActivity::class.java)
@@ -38,6 +40,8 @@ class MainActivity : AppCompatActivity() {
             .setContentTitle("Enjoying Our App?")
             .setContentText("Rate and Review it in the Play Store")
             .setSmallIcon(R.drawable.baseline_notifications_24)
+            .setColor(ContextCompat.getColor(this, R.color.black))
+
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
